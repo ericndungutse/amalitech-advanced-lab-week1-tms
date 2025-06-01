@@ -23,6 +23,9 @@ import com.ndungutse.tms.model.Task;
 import com.ndungutse.tms.service.TaskService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
@@ -56,11 +59,12 @@ public class TaskController {
 
     @PostMapping
     @Operation(summary = "Create a new task", description = "Add a new task to the system")
-    public ResponseEntity<?> createTask(@RequestBody Map<String, Object> taskRequest) {
-        Map<String, Object> newTask = new HashMap<>();
-        newTask.put("id", "sdfkd-34rewr-43rer453");
-        newTask.put("description", "Description");
-        return new ResponseEntity<>("Task Created", HttpStatus.CREATED);
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(schema = @Schema(implementation = Task.class)))
+    public ResponseEntity<Task> createTask(@RequestBody Task taskRequest) {
+        logger.info("Creating a new task with title: " + taskRequest.getTitle());
+        Task task = taskService.createTask(taskRequest);
+        logger.info("Creating new task: " + task.getTitle());
+        return new ResponseEntity<>(task, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
