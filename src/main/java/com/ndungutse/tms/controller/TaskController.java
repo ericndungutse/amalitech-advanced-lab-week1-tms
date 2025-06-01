@@ -1,6 +1,5 @@
 package com.ndungutse.tms.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +23,6 @@ import com.ndungutse.tms.service.TaskService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -69,11 +67,18 @@ public class TaskController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update an existing task", description = "Modify an existing task by its unique identifier")
-    public ResponseEntity<?> updateTask(@PathVariable("id") String id, @RequestBody Map<String, Object> taskRequest) {
-        Map<String, Object> task = new HashMap<>();
-        task.put(id, id);
-        task.put("description", "Description");
-        return new ResponseEntity<>(taskRequest, HttpStatus.OK);
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(schema = @Schema(implementation = Task.class)))
+    public ResponseEntity<?> updateTask(@PathVariable("id") String id, @RequestBody Task taskRequest) {
+        logger.info("Updating task with ID: " + id);
+        Optional<Task> updatedTask = taskService.updateTask(UUID.fromString(id), taskRequest);
+
+        if (updatedTask.isPresent()) {
+            logger.info("Task updated successfully: " + updatedTask.get().getTitle());
+            return new ResponseEntity<>(updatedTask, HttpStatus.OK);
+        } else {
+            logger.warning("Task not found for ID: " + id);
+            return new ResponseEntity<>("Task not found", HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/{id}")

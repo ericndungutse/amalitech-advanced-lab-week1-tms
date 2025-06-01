@@ -10,6 +10,8 @@ import com.ndungutse.tms.repository.TasksRepository;
 public class TaskService {
     public Task createTask(Task task) {
         task.setId(UUID.randomUUID());
+        task.setCompleted(false);
+        task.setCreatedAt(java.time.LocalDateTime.now());
         return TasksRepository.save(task);
     }
 

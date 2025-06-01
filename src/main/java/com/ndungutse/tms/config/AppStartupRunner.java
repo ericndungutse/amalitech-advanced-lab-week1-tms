@@ -21,6 +21,7 @@ public class AppStartupRunner implements CommandLineRunner {
 
         Task task1 = new Task();
         task1.setId(UUID.randomUUID());
+        task1.setCompleted(false);
         task1.setTitle("Write project proposal");
         task1.setDescription("Draft the initial project proposal document.");
         task1.setCreatedAt(LocalDateTime.now());
@@ -29,6 +30,7 @@ public class AppStartupRunner implements CommandLineRunner {
 
         Task task2 = new Task();
         task2.setId(UUID.randomUUID());
+        task2.setCompleted(false);
         task2.setTitle("Design database schema");
         task2.setDescription("Create ER diagrams and table structures.");
         task2.setCreatedAt(LocalDateTime.now());
@@ -37,6 +39,7 @@ public class AppStartupRunner implements CommandLineRunner {
 
         Task task3 = new Task();
         task3.setId(UUID.randomUUID());
+        task3.setCompleted(false);
         task3.setTitle("Setup development environment");
         task3.setDescription("Install required software and tools.");
         task3.setCreatedAt(LocalDateTime.now());
@@ -45,6 +48,7 @@ public class AppStartupRunner implements CommandLineRunner {
 
         Task task4 = new Task();
         task4.setId(UUID.randomUUID());
+        task4.setCompleted(false);
         task4.setTitle("Implement authentication");
         task4.setDescription("Develop login and registration features.");
         task4.setCreatedAt(LocalDateTime.now());
@@ -53,6 +57,7 @@ public class AppStartupRunner implements CommandLineRunner {
 
         Task task5 = new Task();
         task5.setId(UUID.randomUUID());
+        task5.setCompleted(false);
         task5.setTitle("Create REST API");
         task5.setDescription("Build API endpoints for tasks management.");
         task5.setCreatedAt(LocalDateTime.now());
@@ -61,6 +66,7 @@ public class AppStartupRunner implements CommandLineRunner {
 
         Task task6 = new Task();
         task6.setId(UUID.randomUUID());
+        task6.setCompleted(false);
         task6.setTitle("Write unit tests");
         task6.setDescription("Ensure code quality with JUnit tests.");
         task6.setCreatedAt(LocalDateTime.now());
@@ -69,6 +75,7 @@ public class AppStartupRunner implements CommandLineRunner {
 
         Task task7 = new Task();
         task7.setId(UUID.randomUUID());
+        task7.setCompleted(false);
         task7.setTitle("Prepare deployment");
         task7.setDescription("Configure servers and deployment pipeline.");
         task7.setCreatedAt(LocalDateTime.now());
@@ -77,6 +84,7 @@ public class AppStartupRunner implements CommandLineRunner {
 
         Task task8 = new Task();
         task8.setId(UUID.randomUUID());
+        task8.setCompleted(false);
         task8.setTitle("Conduct user training");
         task8.setDescription("Organize sessions to train end users.");
         task8.setCreatedAt(LocalDateTime.now());
@@ -85,6 +93,7 @@ public class AppStartupRunner implements CommandLineRunner {
 
         Task task9 = new Task();
         task9.setId(UUID.randomUUID());
+        task9.setCompleted(false);
         task9.setTitle("Gather feedback");
         task9.setDescription("Collect feedback after user acceptance testing.");
         task9.setCreatedAt(LocalDateTime.now());
@@ -93,6 +102,7 @@ public class AppStartupRunner implements CommandLineRunner {
 
         Task task10 = new Task();
         task10.setId(UUID.randomUUID());
+        task10.setCompleted(false);
         task10.setTitle("Plan next sprint");
         task10.setDescription("Define goals and tasks for upcoming sprint.");
         task10.setCreatedAt(LocalDateTime.now());

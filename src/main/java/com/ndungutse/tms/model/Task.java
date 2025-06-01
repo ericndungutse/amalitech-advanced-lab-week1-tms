@@ -7,8 +7,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "Task entity", example = """
         {
-          "title": " ",
-          "description": " ",
+          "title": "New Task",
+          "description": "New Task Description",
           "completed": false
         }
         """)
