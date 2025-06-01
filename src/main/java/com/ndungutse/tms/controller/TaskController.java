@@ -1,8 +1,6 @@
 package com.ndungutse.tms.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.logging.Logger;
@@ -46,8 +44,8 @@ public class TaskController {
     @Operation(summary = "Get task by ID", description = "Retrieve a task by its unique identifier")
     public ResponseEntity<?> getTaskById(@PathVariable("id") String id) {
         logger.info("Fetching task with ID: " + id);
-        Optional<Task> task = taskService.getTaskById(UUID.fromString(id.toString()));
-        if (task != null) {
+        Optional<Task> task = taskService.getTaskById(UUID.fromString(id));
+        if (task.isPresent()) {
             logger.info("Task found: " + task.get().getTitle());
             return new ResponseEntity<>(task, HttpStatus.OK);
         } else {
