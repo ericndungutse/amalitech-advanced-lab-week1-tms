@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ndungutse.tms.model.Task;
+import com.ndungutse.tms.service.TaskService;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -23,11 +27,15 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping("/api/v1/tasks")
 @Tag(name = "Task Management", description = "Operations related to task management")
 public class TaskController {
+    private static final TaskService taskService = new TaskService();
+    private static final Logger logger = Logger.getLogger(TaskController.class.getName());
 
     @GetMapping
     @Operation(summary = "Get All Tasks", description = "Retrieve all tasks in the system")
-    public ResponseEntity<List<?>> getAllTasks() {
-        return new ResponseEntity<List<?>>(new ArrayList<>(), HttpStatus.OK);
+    public ResponseEntity<List<Task>> getAllTasks() {
+        logger.info("Fetching all tasks");
+        List<Task> tasks = taskService.getAllTasks();
+        return new ResponseEntity<List<Task>>(tasks, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
