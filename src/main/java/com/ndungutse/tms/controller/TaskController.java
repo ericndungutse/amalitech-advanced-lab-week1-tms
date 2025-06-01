@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 import org.springframework.http.HttpStatus;
@@ -35,16 +37,21 @@ public class TaskController {
     public ResponseEntity<List<Task>> getAllTasks() {
         logger.info("Fetching all tasks");
         List<Task> tasks = taskService.getAllTasks();
+        logger.info("Total tasks retrieved: " + tasks.size());
         return new ResponseEntity<List<Task>>(tasks, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Get task by ID", description = "Retrieve a task by its unique identifier")
     public ResponseEntity<?> getTaskById(@PathVariable("id") String id) {
-        Map<String, Object> newTask = new HashMap<>();
-        newTask.put("id", "sdfkd-34rewr-43rer453");
-        newTask.put("description", "Description");
-        return new ResponseEntity<>("Task id: " + id, HttpStatus.OK);
+        logger.info("Fetching task with ID: " + id);
+        Optional<Task> task = taskService.getTaskById(UUID.fromString(id.toString()));
+        if (task != null) {
+            logger.info("Task found: " + task.get().getTitle());
+            return new ResponseEntity<>(task, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Task not found", HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping
