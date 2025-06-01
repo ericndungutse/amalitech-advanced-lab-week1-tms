@@ -84,10 +84,16 @@ public class TaskController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a task", description = "Remove a task from the system by its unique identifier")
     public ResponseEntity<?> deleteTask(@PathVariable("id") String id) {
-        Map<String, Object> response = new HashMap<>();
-        response.put("message", "Task deleted successfully");
-        response.put("id", id);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        logger.info("Deleting task with ID: " + id);
+        boolean isDeleted = taskService.deleteTask(UUID.fromString(id));
+
+        if (isDeleted) {
+            logger.info("Task deleted successfully: " + id);
+            return new ResponseEntity<>("Task deleted successfully", HttpStatus.OK);
+        } else {
+            logger.warning("Task not found for ID: " + id);
+            return new ResponseEntity<>("Task not found", HttpStatus.NOT_FOUND);
+        }
     }
 
 }
