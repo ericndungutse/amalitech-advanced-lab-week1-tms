@@ -10,6 +10,9 @@ public class Task {
     private Boolean completed;
     private LocalDateTime createdAt;
 
+    public Task() {
+    }
+
     public Task(String title, String description, Boolean completed, LocalDateTime createdAt) {
         this.id = UUID.randomUUID();
         this.title = title;
